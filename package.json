@@ -11,5 +11,8 @@
     "url": "https://gitee.com/tomatoes-and-potato/nodejs-koa-project.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.14.1"
+  }
 }
