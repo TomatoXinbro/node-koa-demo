@@ -4,7 +4,8 @@
   "description": "{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/main.js"
   },
   "repository": {
     "type": "git",
@@ -13,6 +14,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "koa": "^2.14.1"
+    "dotenv": "^16.0.3",
+    "koa": "^2.14.1",
+    "nodemon": "^2.0.22"
   }
 }
