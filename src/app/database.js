@@ -1,8 +1,7 @@
-const e = require("express");
 const mysql = require("mysql2");
-const config = require("../app/config");
+const config = require("./config");
 // 创建连接池
-const connections = mysql.createPool({
+const connection = mysql.createPool({
   host: config.MYSQL_HOST,
   port: config.MYSQL_PORT,
   database: config.MYSQL_DATABASE,
@@ -12,10 +11,12 @@ const connections = mysql.createPool({
 
 // For pool initialization, see above
 // 连接测试
-connections.getConnection((err, conn) => {
+connection.getConnection((err, conn) => {
   if (err) {
     console.log("数据库连接失败", err.sqlMessage);
   } else {
     console.log("数据库连接成功");
   }
 });
+
+module.exports = connection.promise();
