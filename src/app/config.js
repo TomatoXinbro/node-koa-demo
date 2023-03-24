@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 module.exports = {
-  APP_POST,
+  APP_PORT,
   MYSQL_HOST,
   MYSQL_PORT,
   MYSQL_DATABASE,
