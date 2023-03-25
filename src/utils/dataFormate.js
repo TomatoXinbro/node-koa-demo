@@ -4,7 +4,6 @@
  * @returns
  */
 const dataFormate = (data = "unknown", code = 200) => {
-  console.log("数据格式化了");
   return {
     code,
     data,
