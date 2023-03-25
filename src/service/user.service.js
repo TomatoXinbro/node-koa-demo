@@ -7,6 +7,13 @@ class UserService {
     const result = await connection.execute(statement, [name]);
     return result[0];
   }
+  // 创建用户
+  async create(users) {
+    const { username, password } = users;
+    const statement = `INSERT INTO user (name, password) VALUES (?, ?);`;
+    const result = await connection.execute(statement, [username, password]);
+    return result[0];
+  }
 }
 
 module.exports = new UserService();

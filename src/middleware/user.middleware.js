@@ -3,7 +3,7 @@ const md5password = require("../utils/password-handle");
 const { getUserByName } = require("../service/user.service.js");
 
 // 用户名密码验证
-const verifyUser = async (ctx, mext) => {
+const verifyUser = async (ctx, next) => {
   // 1.获取用户名和密码
   const { username, password } = ctx.request.body;
   // 2.判断用户名或者密码不能空
@@ -15,7 +15,7 @@ const verifyUser = async (ctx, mext) => {
 
   // 3.判断这次注册的用户名是没有被注册过
   const result = await getUserByName(username);
-  console.log(result);
+  // console.log(result);
   if (result.length) {
     const error = new Error(errorTypes.USER_ALREADY_EXISTS);
     return ctx.app.emit("error", error, ctx);
@@ -25,6 +25,7 @@ const verifyUser = async (ctx, mext) => {
 
 // 密码的加密
 const handlePassword = async (ctx, next) => {
+  const { password } = ctx.request.body;
   ctx.request.body.password = md5password(password);
   await next();
 };

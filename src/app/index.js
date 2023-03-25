@@ -8,5 +8,5 @@ const errorHandle = require("./error-handle");
 app.use(bodyParser()); // request body解析
 app.use(useRoutes.routes());
 app.use(useRoutes.allowedMethods());
-app.on("error", errorHandle);
+app.on("error", errorHandle); // 全局错误处理
 module.exports = app;

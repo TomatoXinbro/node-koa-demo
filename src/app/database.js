@@ -19,4 +19,4 @@ connection.getConnection((err, conn) => {
   }
 });
 
-module.exports = connection.promise();
+module.exports = connection.promise(); // 导出promise 连接
