@@ -1,4 +1,5 @@
-const errorTypes = require('../constants/error-types');
+const errorTypes = require("../constants/error-types");
+const dataFormate = require("../utils/dataFormate");
 
 const errorHandler = (error, ctx) => {
   let status, message;
@@ -34,7 +35,7 @@ const errorHandler = (error, ctx) => {
   }
 
   ctx.status = status;
-  ctx.body = message;
-}
+  ctx.body = dataFormate(message, status);
+};
 
 module.exports = errorHandler;

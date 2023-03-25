@@ -1,13 +1,12 @@
 const { create, getUserByName } = require("../service/user.service");
+const dataFormate = require("../utils/dataFormate");
 
 class UserController {
   async createUsers(ctx, next) {
     // 查询数据
-    await create(ctx.request.body);
+    const result = await create(ctx.request.body);
     // 返回数据
-    const reruselt = `${ctx.request.body.username}创建成功`;
-
-    ctx.body = reruselt;
+    ctx.body = dataFormate(result, 200);
   }
 }
 
