@@ -13,9 +13,9 @@ const connection = mysql.createPool({
 // 连接测试
 connection.getConnection((err, conn) => {
   if (err) {
-    console.log("数据库连接失败", err.sqlMessage);
+    console.log("\u{26D4} 数据库连接失败", err.sqlMessage);
   } else {
-    console.log("数据库连接成功");
+    console.log("\u{1F389} 数据库连接成功");
   }
 });
 
