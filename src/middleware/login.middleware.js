@@ -28,7 +28,6 @@ const verifyLogin = async (ctx, next) => {
     const err = new Error(PASSWORD_IS_INCORRENT);
     return ctx.app.emit("error", err, ctx); // 抛出错误 return不再执行下面语句
   }
-  ctx.body = dataFormate(200, LOGIN_SUCCESS);
 
   await next();
 };

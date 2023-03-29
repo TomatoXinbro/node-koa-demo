@@ -19,7 +19,7 @@ const errorHandler = (error, ctx) => {
       break;
     case errorTypes.PASSWORD_IS_INCORRENT:
       status = 400; // 参数错误
-      message = "密码是错误的~";
+      message = "密码错误~";
       break;
     case errorTypes.UNAUTHORIZATION:
       status = 401; // 参数错误
