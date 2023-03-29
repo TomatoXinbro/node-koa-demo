@@ -3,9 +3,10 @@
  * @param data
  * @returns
  */
-const dataFormate = (data = "unknown", code = 200) => {
+const dataFormate = (code = 200, message = "成功", data = null) => {
   return {
     code,
+    message,
     data,
   };
 };
