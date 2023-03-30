@@ -1,6 +1,4 @@
-const dataFormate = require("../utils/dataFormate");
 const md5password = require("../utils/password-handle");
-const { LOGIN_SUCCESS } = require("../constants/success-types");
 const {
   NAME_OR_PASSWORD_IS_REQUIRED,
   USER_DOES_NOT_EXISTS,
