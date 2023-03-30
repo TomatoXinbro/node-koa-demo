@@ -5,7 +5,7 @@ const {
   PASSWORD_IS_INCORRENT,
 } = require("../constants/error-types");
 const userService = require("../service/user.service");
-
+// 验证登录
 const verifyLogin = async (ctx, next) => {
   //判断用户名密码是否为空
   const { username, password } = ctx.request.body;
@@ -29,6 +29,7 @@ const verifyLogin = async (ctx, next) => {
 
   await next();
 };
+// 验证token
 
 module.exports = {
   verifyLogin,

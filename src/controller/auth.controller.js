@@ -1,9 +1,10 @@
+/* eslint-disable no-undef */
 const dataFormate = require("../utils/dataFormate");
 const { LOGIN_SUCCESS } = require("../constants/success-types");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const path = require("path");
-
+// console.log(__dirname); // 当前文件所在目录
 const PRIVATE_KEY = fs.readFileSync(
   path.resolve(__dirname, "../app/keys/private.key")
 );
