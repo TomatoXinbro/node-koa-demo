@@ -23,7 +23,7 @@ const errorHandler = (error, ctx) => {
       break;
     case errorTypes.UNAUTHORIZATION:
       status = 401; // 参数错误
-      message = "无效的token~";
+      message = "token失效，请重新登录~";
       break;
     case errorTypes.UNPERMISSION:
       status = 401; // 参数错误

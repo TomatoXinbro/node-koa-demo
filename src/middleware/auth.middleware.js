@@ -3,8 +3,12 @@ const {
   NAME_OR_PASSWORD_IS_REQUIRED,
   USER_DOES_NOT_EXISTS,
   PASSWORD_IS_INCORRENT,
+  UNAUTHORIZATION,
 } = require("../constants/error-types");
 const userService = require("../service/user.service");
+const jwt = require("jsonwebtoken");
+const { PUBLIC_KEY } = require("../app/config");
+
 // 验证登录
 const verifyLogin = async (ctx, next) => {
   //判断用户名密码是否为空
@@ -30,7 +34,31 @@ const verifyLogin = async (ctx, next) => {
   await next();
 };
 // 验证token
+const verifyToken = async (ctx, next) => {
+  try {
+    jwt.verify(
+      ctx.request.headers.token,
+      PUBLIC_KEY,
+      {
+        algorithms: ["RS256"],
+      },
+      (err, payload) => {
+        if (err) {
+          console.log("token鉴定失败", err);
+          throw new Error(err);
+        } else {
+          console.log("token通过：", payload);
+        }
+      }
+    );
+  } catch (err) {
+    const error = new Error(UNAUTHORIZATION);
+    return ctx.app.emit("error", error, ctx);
+  }
+  await next();
+};
 
 module.exports = {
   verifyLogin,
+  verifyToken,
 };
