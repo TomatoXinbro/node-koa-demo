@@ -13,7 +13,6 @@ const { PUBLIC_KEY } = require("../app/config");
 const verifyLogin = async (ctx, next) => {
   //判断用户名密码是否为空
   const { username, password } = ctx.request.body;
-  // console.log(username, password);
   if (!username || !password) {
     const err = new Error(NAME_OR_PASSWORD_IS_REQUIRED);
     return ctx.app.emit("error", err, ctx); // 抛出错误 return不再执行下面语句
@@ -30,7 +29,7 @@ const verifyLogin = async (ctx, next) => {
     const err = new Error(PASSWORD_IS_INCORRENT);
     return ctx.app.emit("error", err, ctx); // 抛出错误 return不再执行下面语句
   }
-
+  ctx.user = result[0]; //
   await next();
 };
 // 验证token
@@ -44,10 +43,11 @@ const verifyToken = async (ctx, next) => {
       },
       (err, payload) => {
         if (err) {
-          console.log("token鉴定失败", err);
+          console.log("token鉴权失败", err);
           throw new Error(err);
         } else {
-          console.log("token通过：", payload);
+          console.log("token鉴权通过：", payload);
+          ctx.user = payload; // 通过后把从payload里面解析出来的user信息加载进ctx里面 以供后面的中间件使用
         }
       }
     );

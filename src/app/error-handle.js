@@ -1,6 +1,7 @@
 const errorTypes = require("../constants/error-types");
 const dataFormate = require("../utils/dataFormate");
 
+// 全局错误处理中间件
 const errorHandler = (error, ctx) => {
   let status, message;
 

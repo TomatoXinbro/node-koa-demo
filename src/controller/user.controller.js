@@ -1,4 +1,4 @@
-const { create, getUserByName } = require("../service/user.service");
+const { create } = require("../service/user.service");
 const dataFormate = require("../utils/dataFormate");
 const { CREATE_SUCCESS } = require("../constants/success-types");
 
