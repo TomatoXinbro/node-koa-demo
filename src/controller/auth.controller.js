@@ -25,7 +25,7 @@ class LoginController {
 
   authSuccess(ctx, next) {
     ctx.body = dataFormate(200, "token鉴权通过");
-    console.log(ctx.user.id);
+    // console.log(ctx.user);
   }
 }
 
