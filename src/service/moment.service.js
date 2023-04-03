@@ -2,7 +2,7 @@ const connection = require("../app/database");
 // 动态服务
 class MomentService {
   //分页查询动态列表
-  async getMomentList(pageNum = 1, pageSize = 10) {
+  async getMomentList(pageNum = "1", pageSize = "10") {
     const statement = `
     SELECT 
   m.id id, 
@@ -19,7 +19,6 @@ class MomentService {
       offset + "",
       pageSize,
     ]);
-    // console.log(result);
     return result;
   }
 }
