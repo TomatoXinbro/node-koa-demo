@@ -23,9 +23,16 @@ class MomentService {
       total: total[0].total,
     };
   }
+
   async createMoment(content, userid) {
     const statement = `INSERT INTO moment (content, user_id) VALUES (?, ?);`;
     const [result] = await connection.execute(statement, [content, userid]);
+    return result;
+  }
+
+  async updateMoment(momentId, content) {
+    const statement = `UPDATE moment SET content =? WHERE id = ?;`;
+    const [result] = await connection.execute(statement, [content, momentId]);
     return result;
   }
 }

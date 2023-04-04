@@ -1,4 +1,8 @@
-const { getMomentList, createMoment } = require('../service/moment.service');
+const {
+  getMomentList,
+  createMoment,
+  updateMoment,
+} = require('../service/moment.service');
 const dataFormat = require('../utils/dataFormat');
 
 class MomentController {
@@ -9,12 +13,21 @@ class MomentController {
     ctx.body = dataFormat(200, '获取列表成功', result);
     await next();
   }
-  async create(ctx, nemt) {
+
+  async create(ctx, next) {
     const { moment } = ctx.request.body;
     const { id } = ctx.user;
     const result = await createMoment(moment, id);
     if (result) {
       ctx.body = dataFormat(200, '创建动态成功', result);
+    }
+  }
+
+  async update(ctx, next) {
+    const { momentId, content } = ctx.request.body;
+    const result = await updateMoment(momentId, content);
+    if (result) {
+      ctx.body = dataFormat(200, '修改动态成功啦', result);
     }
   }
 }
