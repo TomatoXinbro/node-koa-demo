@@ -1,4 +1,4 @@
-const connection = require("../app/database");
+const connection = require('../app/database');
 // 用户服务
 class UserService {
   //获取用户信息

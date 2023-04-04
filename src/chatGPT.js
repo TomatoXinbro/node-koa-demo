@@ -1,9 +1,9 @@
-const axios = require("axios");
+const axios = require('axios');
 
-const prompt = "Hello, how are you?";
-const apiUrl = "https://api.openai.com/v1/engines/davinci-codex/completions";
+const prompt = 'Hello, how are you?';
+const apiUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
 
-const apiKey = "<YOUR_API_KEY>"; // 替换为您的 API Key
+const apiKey = '<YOUR_API_KEY>'; // 替换为您的 API Key
 
 axios
   .post(
@@ -14,7 +14,7 @@ axios
     },
     {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${apiKey}`,
       },
     }

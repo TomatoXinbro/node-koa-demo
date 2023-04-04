@@ -1,6 +1,6 @@
-const errorTypes = require("../constants/error-types");
-const md5password = require("../utils/password-handle");
-const { getUserByName } = require("../service/user.service.js");
+const errorTypes = require('../constants/error-types');
+const md5password = require('../utils/password-handle');
+const { getUserByName } = require('../service/user.service.js');
 
 // 用户名密码验证
 const verifyUser = async (ctx, next) => {
@@ -10,7 +10,7 @@ const verifyUser = async (ctx, next) => {
   // ctx.body = "哈哈哈哈哈请求成功";
   if (!username || !password) {
     const error = new Error(errorTypes.NAME_OR_PASSWORD_IS_REQUIRED);
-    return ctx.app.emit("error", error, ctx);
+    return ctx.app.emit('error', error, ctx);
   }
 
   // 3.判断这次注册的用户名是没有被注册过
@@ -18,7 +18,7 @@ const verifyUser = async (ctx, next) => {
   // console.log(result);
   if (result.length) {
     const error = new Error(errorTypes.USER_ALREADY_EXISTS);
-    return ctx.app.emit("error", error, ctx);
+    return ctx.app.emit('error', error, ctx);
   }
   await next();
 };

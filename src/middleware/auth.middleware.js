@@ -1,13 +1,13 @@
-const md5password = require("../utils/password-handle");
+const md5password = require('../utils/password-handle');
 const {
   NAME_OR_PASSWORD_IS_REQUIRED,
   USER_DOES_NOT_EXISTS,
   PASSWORD_IS_INCORRENT,
   UNAUTHORIZATION,
-} = require("../constants/error-types");
-const userService = require("../service/user.service");
-const jwt = require("jsonwebtoken");
-const { PUBLIC_KEY } = require("../app/config");
+} = require('../constants/error-types');
+const userService = require('../service/user.service');
+const jwt = require('jsonwebtoken');
+const { PUBLIC_KEY } = require('../app/config');
 
 // 验证登录
 const verifyLogin = async (ctx, next) => {
@@ -15,19 +15,19 @@ const verifyLogin = async (ctx, next) => {
   const { username, password } = ctx.request.body;
   if (!username || !password) {
     const err = new Error(NAME_OR_PASSWORD_IS_REQUIRED);
-    return ctx.app.emit("error", err, ctx); // 抛出错误 return不再执行下面语句
+    return ctx.app.emit('error', err, ctx); // 抛出错误 return不再执行下面语句
   }
   // 判断用户是否存在
   const result = await userService.getUserByName(username);
   if (!result[0]) {
     const err = new Error(USER_DOES_NOT_EXISTS);
-    return ctx.app.emit("error", err, ctx); // 抛出错误 return不再执行下面语句
+    return ctx.app.emit('error', err, ctx); // 抛出错误 return不再执行下面语句
   }
 
   // 判断密码是否正确
   if (md5password(password) !== result[0].password) {
     const err = new Error(PASSWORD_IS_INCORRENT);
-    return ctx.app.emit("error", err, ctx); // 抛出错误 return不再执行下面语句
+    return ctx.app.emit('error', err, ctx); // 抛出错误 return不再执行下面语句
   }
   ctx.user = result[0]; //
   await next();
@@ -39,21 +39,21 @@ const verifyToken = async (ctx, next) => {
       ctx.request.headers.token,
       PUBLIC_KEY,
       {
-        algorithms: ["RS256"],
+        algorithms: ['RS256'],
       },
       (err, payload) => {
         if (err) {
-          console.log("token鉴权失败", err);
+          console.log('token鉴权失败', err);
           throw new Error(err);
         } else {
-          console.log("token鉴权通过：", payload);
+          console.log('token鉴权通过：', payload);
           ctx.user = payload; // 通过后把从payload里面解析出来的user信息加载进ctx里面 以供后面的中间件使用
         }
       }
     );
   } catch (err) {
     const error = new Error(UNAUTHORIZATION);
-    return ctx.app.emit("error", error, ctx);
+    return ctx.app.emit('error', error, ctx);
   }
   await next();
 };
