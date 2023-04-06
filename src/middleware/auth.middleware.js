@@ -4,8 +4,10 @@ const {
   USER_DOES_NOT_EXISTS,
   PASSWORD_IS_INCORRENT,
   UNAUTHORIZATION,
+  UNPERMISSION,
 } = require('../constants/error-types');
 const userService = require('../service/user.service');
+const authService = require('../service/auth.service');
 const jwt = require('jsonwebtoken');
 const { PUBLIC_KEY } = require('../app/config');
 
@@ -58,7 +60,24 @@ const verifyToken = async (ctx, next) => {
   await next();
 };
 
+//验证权限
+const verifyEmpower = async (ctx, next) => {
+  //  获取参数
+  const userId = ctx.user.id;
+  const paramsValue = ctx.request.params;
+  const [paramsKey] = Object.keys(paramsValue);
+  const tableName = paramsKey.replace('Id', '');
+  const id = paramsValue[paramsKey];
+  const isEmpower = await authService.getEmpower(tableName, id, userId);
+  if (isEmpower.length === 0) {
+    const err = new Error(UNPERMISSION);
+    return ctx.app.emit('error', err, ctx);
+  }
+  await next();
+};
+
 module.exports = {
   verifyLogin,
   verifyToken,
+  verifyEmpower,
 };

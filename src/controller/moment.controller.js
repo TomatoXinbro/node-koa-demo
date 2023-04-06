@@ -24,7 +24,8 @@ class MomentController {
   }
 
   async update(ctx, next) {
-    const { momentId, content } = ctx.request.body;
+    const { content } = ctx.request.body;
+    const { momentId } = ctx.request.params;
     const result = await updateMoment(momentId, content);
     if (result) {
       ctx.body = dataFormat(200, '修改动态成功啦', result);
