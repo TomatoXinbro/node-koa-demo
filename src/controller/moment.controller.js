@@ -2,6 +2,7 @@ const {
   getMomentList,
   createMoment,
   updateMoment,
+  removeMoment,
 } = require('../service/moment.service');
 const dataFormat = require('../utils/dataFormat');
 
@@ -29,6 +30,14 @@ class MomentController {
     const result = await updateMoment(momentId, content);
     if (result) {
       ctx.body = dataFormat(200, '修改动态成功啦', result);
+    }
+  }
+
+  async remove(ctx, next) {
+    const id = ctx.request.params.momentId;
+    const result = await removeMoment(id);
+    if (result) {
+      ctx.body = dataFormat(200, '删除成功！', result);
     }
   }
 }

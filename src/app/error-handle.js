@@ -28,7 +28,7 @@ const errorHandler = (error, ctx) => {
       break;
     case errorTypes.UNPERMISSION:
       status = 401; // 参数错误
-      message = '您不具备操作的权限~';
+      message = '您不具备操作的权限或资源不存在~';
       break;
     default:
       status = 404;
