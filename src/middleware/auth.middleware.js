@@ -38,7 +38,7 @@ const verifyLogin = async (ctx, next) => {
 const verifyToken = async (ctx, next) => {
   try {
     jwt.verify(
-      ctx.request.headers.token,
+      ctx.request.headers.authorization,
       PUBLIC_KEY,
       {
         algorithms: ['RS256'],
@@ -68,11 +68,16 @@ const verifyEmpower = async (ctx, next) => {
   const [paramsKey] = Object.keys(paramsValue);
   const tableName = paramsKey.replace('Id', '');
   const id = paramsValue[paramsKey];
+
   const isEmpower = await authService.getEmpower(tableName, id, userId);
   if (isEmpower.length === 0) {
+    console.log('权限鉴定失败|查询结果：', isEmpower);
     const err = new Error(UNPERMISSION);
     return ctx.app.emit('error', err, ctx);
+  } else {
+    console.log('权限鉴定通过~', tableName, id, userId);
   }
+
   await next();
 };
 
