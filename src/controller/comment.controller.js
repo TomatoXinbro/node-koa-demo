@@ -50,11 +50,10 @@ class CommentController {
     const { momentId } = ctx.request.params;
     const result = await getCommentList(momentId);
     if (result.length !== 0) {
-      ctx.body = dataFormat(200, '获取列表成功', result);
+      ctx.body = dataFormat(200, undefined, result);
     } else {
       ctx.body = dataFormat(204, '该动态下没有评论', result);
     }
-    console.log(result);
   }
 }
 
