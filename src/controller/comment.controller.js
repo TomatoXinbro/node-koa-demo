@@ -2,6 +2,7 @@ const {
   createComment,
   replyComment,
   removeComment,
+  getCommentList,
 } = require('../service/comment.service');
 const dataFormat = require('../utils/dataFormat');
 
@@ -42,6 +43,18 @@ class CommentController {
       ctx.body = dataFormat(500, '删除失败', error);
       console.log(error);
     }
+  }
+
+  // 获取评论列表
+  async list(ctx, next) {
+    const { momentId } = ctx.request.params;
+    const result = await getCommentList(momentId);
+    if (result.length !== 0) {
+      ctx.body = dataFormat(200, '获取列表成功', result);
+    } else {
+      ctx.body = dataFormat(204, '该动态下没有评论', result);
+    }
+    console.log(result);
   }
 }
 

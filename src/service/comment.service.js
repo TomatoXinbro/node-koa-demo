@@ -34,6 +34,20 @@ class CommentService {
   //   const result = await connection.execute(statement, [commentIds]);
   //   return result[0];
   // }
+
+  // 获取评论列表
+  async getCommentList(momentId) {
+    const statement = `
+    SELECT 
+    c.id, c.content, c.comment_id commendId, c.createAt createTime,
+    JSON_OBJECT('id', u.id, 'name', u.name) user
+  FROM comment c
+  LEFT JOIN user u ON u.id = c.user_id
+  WHERE moment_id = ?;
+  `;
+    const result = await connection.execute(statement, [momentId]);
+    return result[0];
+  }
 }
 
 module.exports = new CommentService();
