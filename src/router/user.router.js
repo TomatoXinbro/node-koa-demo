@@ -1,5 +1,5 @@
 const Router = require('koa-router');
-const { createUsers } = require('../controller/user.controller');
+const { createUsers, getPortrait } = require('../controller/user.controller');
 const { verifyUser, handlePassword } = require('../middleware/user.middleware');
 
 const userRouter = new Router({ prefix: '/users' });
@@ -10,4 +10,6 @@ const userRouter = new Router({ prefix: '/users' });
  */
 userRouter.post('/', verifyUser, handlePassword, createUsers);
 
+// 获取用户头像
+userRouter.get('/portrait/:id', getPortrait);
 module.exports = userRouter;

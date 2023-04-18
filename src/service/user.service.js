@@ -20,6 +20,12 @@ class UserService {
     const result = await connection.execute(statement, [url, id]);
     return result[0];
   }
+  // 获取头像图片信息
+  async getPortraitInfo(id) {
+    const statement = `	SELECT * FROM avatar WHERE user_id=?;`;
+    const result = await connection.execute(statement, [id]);
+    return result[0];
+  }
 }
 
 module.exports = new UserService();
