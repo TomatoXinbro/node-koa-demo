@@ -14,6 +14,12 @@ class UserService {
     const result = await connection.execute(statement, [username, password]);
     return result[0];
   }
+  // 添加用户头像链接
+  async createPortraitUrl(id, url) {
+    const statement = `	UPDATE  user SET avatar_url=? WHERE id=?; `;
+    const result = await connection.execute(statement, [url, id]);
+    return result[0];
+  }
 }
 
 module.exports = new UserService();

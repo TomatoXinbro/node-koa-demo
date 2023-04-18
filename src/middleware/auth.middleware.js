@@ -11,7 +11,7 @@ const authService = require('../service/auth.service');
 const jwt = require('jsonwebtoken');
 const { PUBLIC_KEY } = require('../app/config');
 
-// 验证登录
+// 登录验证
 const verifyLogin = async (ctx, next) => {
   //判断用户名密码是否为空
   const { username, password } = ctx.request.body;
@@ -34,7 +34,7 @@ const verifyLogin = async (ctx, next) => {
   ctx.user = result[0]; //
   await next();
 };
-// 验证token
+// 登录验证token
 const verifyToken = async (ctx, next) => {
   try {
     jwt.verify(
