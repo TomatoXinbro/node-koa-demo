@@ -16,7 +16,6 @@ class UserController {
     try {
       // 获取图片信息
       const [portraitInfo] = await getPortraitInfo(id);
-      console.log(portraitInfo);
       // 读取并返回
       ctx.response.set('content-type', portraitInfo.mimetype);
       ctx.body = fs.createReadStream(
