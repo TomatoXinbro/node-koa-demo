@@ -3,7 +3,7 @@ const {
   portraitUpload,
   pictureUpload,
 } = require('../middleware/file.middleware');
-const { portraitSave } = require('../controller/file.controller');
+const { portraitSave, pictureSave } = require('../controller/file.controller');
 const Router = require('koa-router');
 const fileRouter = new Router({
   prefix: '/upload',
@@ -14,6 +14,6 @@ fileRouter.post('/portrait', verifyToken, portraitUpload, portraitSave);
 
 // 图片上传
 
-// fileRouter.post('/picture', verifyToken, pictureUpload);
+fileRouter.post('/picture', verifyToken, pictureUpload, pictureSave);
 
 module.exports = fileRouter;

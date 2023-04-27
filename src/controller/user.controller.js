@@ -2,7 +2,7 @@ const { create, getPortraitInfo } = require('../service/user.service');
 const dataFormat = require('../utils/dataFormat');
 const { CREATE_SUCCESS } = require('../constants/success-types');
 const { PORTRAIT_PATH } = require('../constants/file-path');
-const fs = require('fs');
+const sharp = require('sharp');
 
 class UserController {
   async createUsers(ctx, next) {
@@ -13,15 +13,18 @@ class UserController {
   }
   async getPortrait(ctx, next) {
     const { id } = ctx.request.params;
+    const { w = 100, h = 100 } = ctx.request.query; // 默认传100*100大小的头像
     try {
       // 获取图片信息
       const [portraitInfo] = await getPortraitInfo(id);
       if (portraitInfo) {
-        // 读取并返回
+        // 读取调整大小并返回
+        // 读取原始图片
+        const image = sharp(`${PORTRAIT_PATH}/${portraitInfo.filename}`);
+        // 调整大小
+        image.resize(Number(w), Number(h));
         ctx.response.set('content-type', portraitInfo.mimetype);
-        ctx.body = fs.createReadStream(
-          `${PORTRAIT_PATH}/${portraitInfo.filename}`
-        );
+        ctx.body = await image.toBuffer();
       } else {
         ctx.body = dataFormat(404, '请求资源不存在');
       }

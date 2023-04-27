@@ -2,7 +2,7 @@ const Router = require('koa-router');
 const momentRouter = new Router({
   prefix: '/moment',
 });
-const { getList } = require('../controller/moment.controller');
+const { getList, getPicture } = require('../controller/moment.controller');
 const { verifyToken, verifyEmpower } = require('../middleware/auth.middleware');
 const { create, update, remove } = require('../controller/moment.controller');
 /**
@@ -21,5 +21,8 @@ momentRouter.patch('/:momentId', verifyToken, verifyEmpower, update);
  * 删除动态
  */
 momentRouter.delete('/:momentId', verifyToken, verifyEmpower, remove);
+
+// 获取动态图片
+// momentRouter.get('/picture/:momentId', getPicture);
 
 module.exports = momentRouter;
