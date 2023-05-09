@@ -10,6 +10,10 @@ const { create, update, remove } = require('../controller/moment.controller');
  */
 momentRouter.get('/list', getList);
 /**
+ * 获取动态详情
+ */
+//  momentRouter.get('/:momentId', detail);
+/**
  * 发布动态
  */
 momentRouter.post('/create', verifyToken, create);
@@ -22,7 +26,7 @@ momentRouter.patch('/:momentId', verifyToken, verifyEmpower, update);
  */
 momentRouter.delete('/:momentId', verifyToken, verifyEmpower, remove);
 
-// 获取动态图片
-// momentRouter.get('/picture/:momentId', getPicture);
+// 获取动态图片的服务
+momentRouter.get('/picture/:filename', getPicture);
 
 module.exports = momentRouter;

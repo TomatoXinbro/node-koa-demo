@@ -42,12 +42,6 @@ class MomentService {
     const [result] = await connection.execute(statement, [Momentid]);
     return result;
   }
-  // // 获取动态图片信息
-  // async getPictureInfo(MomentId) {
-  //   const statement = `	SELECT * FROM file WHERE moment_id=?;`;
-  //   const result = await connection.execute(statement, [MomentId]);
-  //   return result[0];
-  // }
 }
 
 module.exports = new MomentService();
