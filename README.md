@@ -15,13 +15,12 @@ koa node.js mysql
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+.env 文件需要自己配置，格式如下：
 
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+> APP_HOST=http://localhost
+> APP_PORT=8888
+> MYSQL_HOST=localhost
+> MYSQL_PORT=3306
+> MYSQL_DATABASE=koaProject
+> MYSQL_USER=root
+> MYSQL_PASSWORD=你的数据库密码
